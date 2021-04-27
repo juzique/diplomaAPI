@@ -2,18 +2,14 @@ from django.db import models
 
 # Create your models here.
 
-class Author(models.Model):
+class User(models.Model):
     name = models.CharField(max_length=255)
-    email = models.EmailField()
 
     def __str__(self):
-        return self.title
+        return self.name
 
-class Article(models.Model):
-    title = models.CharField(max_length=120)
-    description = models.TextField()
-    body = models.TextField()
-    author = models.ForeignKey('Author', related_name='articles',on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.title
+class Coordinations(models.Model):
+    lon = models.DecimalField(max_digits=10,decimal_places=3)
+    lat = models.DecimalField(max_digits=10,decimal_places=3)
+    #acc = models.DecimalField(max_digits=10,decimal_places=3)
+    date = models.DateField()

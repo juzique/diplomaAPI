@@ -4,12 +4,12 @@ from rest_framework.views import APIView
 from rest_framework.generics import get_object_or_404
 # Create your views here.
 
-from .models import Article
+from .models import Coordinations
 from .serializers import ArticleSerializer
 
 class ArticleView(APIView):
-    def get(self, request):
-        articles = Article.objects.all()
+    def get(self, request, pk):
+        articles = Coordinations.objects.all()
         serializer = ArticleSerializer(articles, many=True)
         return Response({"articles": serializer.data})
 
@@ -21,7 +21,7 @@ class ArticleView(APIView):
         return Response({"success": "Article '{}' created successfully".format(article_saved.title)})
 
     def put(self, request, pk):
-        saved_article = get_object_or_404(Article.objects.all(), pk=pk)
+        saved_article = get_object_or_404(Coordinations.objects.all(), pk=pk)
         data = request.data.get('article')
         serializer = ArticleSerializer(instance=saved_article, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
@@ -32,7 +32,7 @@ class ArticleView(APIView):
 
     def delete(self, request, pk):
         # Get object with this pk
-        article = get_object_or_404(Article.objects.all(), pk=pk)
+        article = get_object_or_404(Coordinations.objects.all(), pk=pk)
         article.delete()
         return Response({
             "message": "Article with id `{}` has been deleted.".format(pk)
