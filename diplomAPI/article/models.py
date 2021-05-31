@@ -11,7 +11,7 @@ class User(models.Model):
         return self.name
 
 class Coordinations(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
     lon = models.DecimalField(max_digits=10,decimal_places=3)
     lat = models.DecimalField(max_digits=10,decimal_places=3)
     acc = models.DecimalField(max_digits=10,decimal_places=3)
